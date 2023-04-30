@@ -84,6 +84,26 @@ flutter:
         - asset: assets/fonts/WorkSans-Black.ttf
         - asset: assets/fonts/WorkSans-Thin.ttf
         - asset: assets/fonts/WorkSans-Light.ttf
+
+
+    - family: Karla
+      fonts:
+        - asset: assets/fonts/Karla-Medium.ttf
+        - asset: assets/fonts/Karla-Bold.ttf
+        - asset: assets/fonts/Karla-Regular.ttf
+        - asset: assets/fonts/Karla-SemiBold.ttf
+        - asset: assets/fonts/Karla-ExtraBold.ttf
+        - asset: assets/fonts/Karla-Light.ttf
+
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Medium.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+        - asset: assets/fonts/Poppins-Black.ttf
+        - asset: assets/fonts/Poppins-Thin.ttf
+        - asset: assets/fonts/Poppins-Light.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

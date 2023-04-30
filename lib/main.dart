@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:model_screen/view/reviews_screen.dart';
+import 'package:model_screen/view/music_explore_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ReviewsScreen(),
+      home: const MusicExploreScreen(),
     );
   }
 }
