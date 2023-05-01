@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
-import '../data/map_data.dart';
+import '../data/music_data.dart';
+import '../model/map_model.dart';
 import '../res/common/map_common/app_common_first.dart';
 import '../res/common/map_common/app_common_second.dart';
 import '../res/common/map_common/app_common_third.dart';
@@ -14,6 +17,14 @@ class MusicExploreScreen extends StatefulWidget {
 }
 
 class _MusicExploreScreenState extends State<MusicExploreScreen> {
+  UsersData? userData;
+
+  @override
+  void initState() {
+    userData = usersDataFromMap(jsonEncode(musicExploreData));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,8 +129,6 @@ class _MusicExploreScreenState extends State<MusicExploreScreen> {
       body: Stack(
         children: [
           ListView(
-            shrinkWrap: true,
-            physics: const AlwaysScrollableScrollPhysics(),
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 20),
@@ -168,17 +177,15 @@ class _MusicExploreScreenState extends State<MusicExploreScreen> {
                     SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.15,
-                      width: MediaQuery.of(context).size.width * 1.5,
                       child: ListView.separated(
-                        physics: const AlwaysScrollableScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) => ListOneCommon(
-                          image: firstModel[index].image,
-                          nameText: firstModel[index].name,
+                          image: userData!.firstModel![index].image,
+                          nameText: userData!.firstModel![index].name,
                         ),
                         separatorBuilder: (context, index) => SizedBox(
                             width: MediaQuery.of(context).size.width * 0.02),
-                        itemCount: firstModel.length,
+                        itemCount: userData!.firstModel!.length,
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.02),
@@ -196,16 +203,16 @@ class _MusicExploreScreenState extends State<MusicExploreScreen> {
                       height: MediaQuery.of(context).size.height * 0.25,
                       width: MediaQuery.of(context).size.width * 1.5,
                       child: ListView.separated(
-                        physics: const AlwaysScrollableScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) => ListTwoCommon(
-                          image: secondModel[index].image,
-                          name: secondModel[index].name,
-                          description: secondModel[index].description,
+                          image: userData!.secondModel![index].image,
+                          name: userData!.secondModel![index].name,
+                          description:
+                              userData!.secondModel![index].description,
                         ),
                         separatorBuilder: (context, index) => SizedBox(
                             width: MediaQuery.of(context).size.width * 0.02),
-                        itemCount: secondModel.length,
+                        itemCount: userData!.secondModel!.length,
                       ),
                     ),
                     const Text(
@@ -222,16 +229,15 @@ class _MusicExploreScreenState extends State<MusicExploreScreen> {
                       height: MediaQuery.of(context).size.height * 0.25,
                       width: MediaQuery.of(context).size.width * 1.5,
                       child: ListView.separated(
-                        physics: const AlwaysScrollableScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) => ListThreeCommon(
-                          image: thirdModel[index].image,
-                          name: thirdModel[index].name,
-                          song: thirdModel[index].song,
+                          image: userData!.thirdModel![index].image,
+                          name: userData!.thirdModel![index].name,
+                          song: userData!.thirdModel![index].song,
                         ),
                         separatorBuilder: (context, index) => SizedBox(
                             width: MediaQuery.of(context).size.width * 0.02),
-                        itemCount: thirdModel.length,
+                        itemCount: userData!.thirdModel!.length,
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.02),
@@ -249,16 +255,16 @@ class _MusicExploreScreenState extends State<MusicExploreScreen> {
                       height: MediaQuery.of(context).size.height * 0.25,
                       width: MediaQuery.of(context).size.width * 1.5,
                       child: ListView.separated(
-                        physics: const AlwaysScrollableScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) => ListTwoCommon(
-                          image: fourthModel[index].image,
-                          name: fourthModel[index].name,
-                          description: fourthModel[index].description,
+                          image: userData!.fourthModel![index].image,
+                          name: userData!.fourthModel![index].name,
+                          description:
+                              userData!.fourthModel![index].description,
                         ),
                         separatorBuilder: (context, index) => SizedBox(
                             width: MediaQuery.of(context).size.width * 0.02),
-                        itemCount: fourthModel.length,
+                        itemCount: userData!.fourthModel!.length,
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.02),
@@ -276,16 +282,15 @@ class _MusicExploreScreenState extends State<MusicExploreScreen> {
                       height: MediaQuery.of(context).size.height * 0.25,
                       width: MediaQuery.of(context).size.width * 1.5,
                       child: ListView.separated(
-                        physics: const AlwaysScrollableScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) => ListThreeCommon(
-                          image: fifthModel[index].image,
-                          name: fifthModel[index].name,
-                          song: fifthModel[index].song,
+                          image: userData!.fifthModel![index].image,
+                          name: userData!.fifthModel![index].name,
+                          song: userData!.fifthModel![index].song,
                         ),
                         separatorBuilder: (context, index) => SizedBox(
                             width: MediaQuery.of(context).size.width * 0.02),
-                        itemCount: fifthModel.length,
+                        itemCount: userData!.fifthModel!.length,
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.02),
@@ -303,7 +308,7 @@ class _MusicExploreScreenState extends State<MusicExploreScreen> {
                       height: MediaQuery.of(context).size.height * 0.50,
                       width: MediaQuery.of(context).size.width * 1.5,
                       child: GridView.builder(
-                        itemCount: sixthModel.length,
+                        itemCount: userData!.sixthModel!.length,
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         gridDelegate:
@@ -313,9 +318,9 @@ class _MusicExploreScreenState extends State<MusicExploreScreen> {
                         ),
                         itemBuilder: (BuildContext context, int index) {
                           return ListThreeCommon(
-                            image: sixthModel[index].image,
-                            name: sixthModel[index].name,
-                            song: sixthModel[index].song,
+                            image: userData!.sixthModel![index].image,
+                            name: userData!.sixthModel![index].name,
+                            song: userData!.sixthModel![index].song,
                           );
                         },
                       ),
@@ -352,16 +357,15 @@ class _MusicExploreScreenState extends State<MusicExploreScreen> {
                       height: MediaQuery.of(context).size.height * 0.25,
                       width: MediaQuery.of(context).size.width * 1.5,
                       child: ListView.separated(
-                        physics: const AlwaysScrollableScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) => ListThreeCommon(
-                          image: sevenModel[index].image,
-                          name: sevenModel[index].name,
-                          song: sevenModel[index].song,
+                          image: userData!.seventhModel![index].image,
+                          name: userData!.seventhModel![index].name,
+                          song: userData!.seventhModel![index].song,
                         ),
                         separatorBuilder: (context, index) => SizedBox(
                             width: MediaQuery.of(context).size.width * 0.02),
-                        itemCount: sevenModel.length,
+                        itemCount: userData!.seventhModel!.length,
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.2),
@@ -376,7 +380,7 @@ class _MusicExploreScreenState extends State<MusicExploreScreen> {
               height: MediaQuery.of(context).size.height * 0.09,
               width: MediaQuery.of(context).size.width * 1,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(8),
                   color: Colors.white,
                   border: Border.all(color: const Color(0xFF32B1F8))),
               child: Column(
@@ -386,10 +390,13 @@ class _MusicExploreScreenState extends State<MusicExploreScreen> {
                     height: 4,
                     width: 196,
                     decoration: const BoxDecoration(
-                        gradient: LinearGradient(colors: [
-                      Color(0xFF1D93D5),
-                      Color(0xFFAF1FA8),
-                    ])),
+                      gradient: LinearGradient(colors: [
+                        Color(0xFF1D93D5),
+                        Color(0xFFAF1FA8),
+                      ]),
+                      borderRadius:
+                          BorderRadius.only(topLeft: Radius.circular(10)),
+                    ),
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   Padding(
